@@ -1,10 +1,18 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
-const routes: Array<RouteRecordRaw> = []
-
-const router = createRouter({
-  history: createWebHashHistory(),
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
+import { basicRoutes as routes } from './routes'
+import { setupRouterGuard } from './guard'
+import type { App } from 'vue'
+const isHash = import.meta.env.VITE_USE_HASH === 'true'
+export const router = createRouter({
+  history: isHash ? createWebHashHistory('/') : createWebHistory('/'),
   routes,
 })
 
-export default router
+export function setupRouter(app: App) {
+  app.use(router)
+  setupRouterGuard(router)
+}

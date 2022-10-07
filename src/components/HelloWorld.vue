@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps<{ msg: string }>()
-
 const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
   <div class="card" flex flex-col>
     <button text-center icon-btn bg-cyan border-rd w-30 ma @click="count++">
       count is {{ count }}

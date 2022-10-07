@@ -10,9 +10,14 @@ interface HttpRequestConfig<T, R> extends RequestConfig<IResponse<R>> {
   data?: T
 }
 const request = new Request({
-  baseURL: import.meta.env.VITE_APP_GLOB_BASE_API,
+  baseURL: import.meta.env.VITE_URL_H5_HW2,
   timeout: 1000 * 60 * 5,
   // withCredentials: true,
+  headers: {
+    accept: 'application/json',
+    'Accept-Language': 'zh',
+    'Ocp-Apim-Subscription-Key': '41ebd915861541819dc803e3eddfdeed',
+  },
   interceptors: {
     // 请求拦截器
     requestInterceptors: (config: AxiosRequestConfig) => {
