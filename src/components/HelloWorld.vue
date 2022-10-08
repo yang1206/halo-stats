@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { getH5CampaignMissions } from '@/api'
 
 const count = ref(0)
+const add = () => {
+  count.value++
+}
+getH5CampaignMissions()
 </script>
 
 <template>
   <div class="card" flex flex-col>
-    <button text-center icon-btn bg-cyan border-rd w-30 ma @click="count++">
+    <button text-center icon-btn bg-cyan border-rd w-30 ma @click="add">
       count is {{ count }}
     </button>
+    <n-button @click="add">Default</n-button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
+    <n-button type="success"> Success </n-button>
   </div>
   <a class="icon-btn mx-2">unocss</a>
   <p>

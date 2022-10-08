@@ -21,14 +21,17 @@ const request = new Request({
   interceptors: {
     // 请求拦截器
     requestInterceptors: (config: AxiosRequestConfig) => {
+      window.$loadingBar?.start()
       return config
     },
     // 响应拦截器
     responseInterceptors: (result: AxiosResponse) => {
+      window.$loadingBar?.finish()
       return result
     },
     responseInterceptorsCatch: (error) => {
-      error.response
+      window.$loadingBar?.error()
+      error.response && window.$message?.error(error.response.data)
       return Promise.reject(new Error(error.response.data))
     },
   },

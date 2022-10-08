@@ -38,9 +38,9 @@ declare namespace Theme {
   interface Setting {
     isMobile: boolean
     darkMode: boolean
-    sider: Sider
-    header: Header
-    tab: Tab
+    // sider: Sider
+    // header: Header
+    // tab: Tab
     /** 主题颜色 */
     primaryColor: string
     otherColor: OtherColor

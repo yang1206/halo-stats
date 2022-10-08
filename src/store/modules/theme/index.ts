@@ -32,13 +32,13 @@ export const useThemeStore = defineStore('theme-store', {
       this.darkMode = !this.darkMode
     },
     /** 切换/关闭 折叠侧边栏 */
-    toggleCollapsed() {
-      this.sider.collapsed = !this.sider.collapsed
-    },
+    // toggleCollapsed() {
+    //   this.sider.collapsed = !this.sider.collapsed
+    // },
     /** 设置 折叠侧边栏 */
-    setCollapsed(collapsed: boolean) {
-      this.sider.collapsed = collapsed
-    },
+    // setCollapsed(collapsed: boolean) {
+    //   this.sider.collapsed = collapsed
+    // },
     /** 设置主题色 */
     setPrimaryColor(color: string) {
       this.primaryColor = color
