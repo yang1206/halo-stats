@@ -1,42 +1,16 @@
 <script setup lang="ts">
 import { getH5CampaignMissions } from '@/api'
-
-const count = ref(0)
-const add = () => {
-  count.value++
-}
-getH5CampaignMissions()
+getH5CampaignMissions().then((res) => {
+  res.map(() => {
+    // console.log(item.imageUrl)
+  })
+})
 </script>
 
 <template>
-  <div class="card" flex flex-col>
-    <button text-center icon-btn bg-cyan border-rd w-30 ma @click="add">
-      count is {{ count }}
-    </button>
-    <n-button @click="add">Default</n-button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-    <n-button type="success"> Success </n-button>
-  </div>
-  <a class="icon-btn mx-2">unocss</a>
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <n-layout>
+    <n-layout-header>颐和园路</n-layout-header>
+    <n-layout-content content-style="padding: 24px;"> 平山道 </n-layout-content>
+    <n-layout-footer>成府路</n-layout-footer>
+  </n-layout>
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>

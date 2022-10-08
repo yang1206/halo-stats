@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { kebabCase } from 'lodash-es'
 import { useDialog, useLoadingBar, useMessage, useNotification } from 'naive-ui'
-import { useCssVar } from '@vueuse/core'
 import { useThemeStore } from '@/store'
-import type { GlobalThemeOverrides } from 'naive-ui'
 // 挂载naive组件的方法至window, 以便在全局使用
 function setupNaiveTools() {
   window.$loadingBar = useLoadingBar()
@@ -20,23 +17,7 @@ const NaiveProviderContent = defineComponent({
   },
 })
 const themStore = useThemeStore()
-type ThemeVars = Exclude<GlobalThemeOverrides['common'], undefined>
-type ThemeVarsKeys = keyof ThemeVars
-watch(
-  () => themStore.naiveThemeOverrides.common,
-  (common) => {
-    for (const key in common) {
-      useCssVar(`--${kebabCase(key)}`, document.documentElement).value =
-        common[key as ThemeVarsKeys] || ''
-      if (key === 'primaryColor')
-        window.localStorage.setItem(
-          '__THEME_COLOR__',
-          common[key as ThemeVarsKeys] || ''
-        )
-    }
-  },
-  { immediate: true }
-)
+
 watch(
   () => themStore.darkMode,
   (newValue) => {
@@ -47,34 +28,23 @@ watch(
     immediate: true,
   }
 )
-function handleWindowResize() {
-  themStore.setIsMobile(document.body.offsetWidth <= 640)
-}
-onMounted(() => {
-  handleWindowResize()
-  window.addEventListener('resize', handleWindowResize)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleWindowResize)
-})
 </script>
 
 <template>
-  <n-config-provider
-    w-full
-    h-full
-    :theme-overrides="themStore.naiveThemeOverrides"
-    :theme="themStore.naiveTheme"
-  >
+  <n-config-provider w-full h-full :theme="themStore.naiveTheme">
     <n-loading-bar-provider>
       <n-dialog-provider>
         <n-notification-provider>
           <n-message-provider>
-            <slot />
+            <div class="app-container" :class="{ dark: themStore.darkMode }">
+              <slot />
+            </div>
+
             <NaiveProviderContent />
           </n-message-provider>
         </n-notification-provider>
       </n-dialog-provider>
     </n-loading-bar-provider>
+    <n-global-style />
   </n-config-provider>
 </template>
