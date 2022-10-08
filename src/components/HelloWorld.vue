@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { Chinese } from 's2t-chinese'
 import { getH5CampaignMissions } from '@/api'
 getH5CampaignMissions().then((res) => {
-  res.map(() => {
-    // console.log(item.imageUrl)
+  res.map((item) => {
+    console.log(Chinese(item.description, 't2s'))
   })
 })
 </script>
