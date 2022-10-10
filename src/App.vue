@@ -1,13 +1,12 @@
-<script setup lang="ts">
-import AppProvider from './components/common/AppProvider.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <AppProvider>
     <div has-sider class="main-wrap" position="static">
       <!-- 侧边栏 -->
-
+      <SlideBar />
       <div class="content-wrap">
+        <Nav />
         <router-view v-slot="{ Component }" class="app-wrap">
           <keep-alive>
             <component :is="Component" v-if="$route.meta.keepAlive" />
@@ -21,6 +20,3 @@ import AppProvider from './components/common/AppProvider.vue'
     <!-- 登录/注册公共组件 -->
   </AppProvider>
 </template>
-<style lang="scss">
-@import '@/styles/main.scss';
-</style>

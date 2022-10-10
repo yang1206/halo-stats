@@ -7,4 +7,4 @@ export interface CampaignMission {
   id: string
   contentId: string
 }
-export type CampaignMissions = Array<CampaignMission>
+export type ICampaignMissions = Array<CampaignMission>

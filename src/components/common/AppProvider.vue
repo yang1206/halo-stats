@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDialog, useLoadingBar, useMessage, useNotification } from 'naive-ui'
-import { useThemeStore } from '@/store'
+import { useAppStore } from '@/store'
 // 挂载naive组件的方法至window, 以便在全局使用
 function setupNaiveTools() {
   window.$loadingBar = useLoadingBar()
@@ -16,10 +16,10 @@ const NaiveProviderContent = defineComponent({
     return h('div')
   },
 })
-const themStore = useThemeStore()
+const appStore = useAppStore()
 
 watch(
-  () => themStore.darkMode,
+  () => appStore.darkMode,
   (newValue) => {
     if (newValue) document.documentElement.classList.add('dark')
     else document.documentElement.classList.remove('dark')
@@ -31,12 +31,12 @@ watch(
 </script>
 
 <template>
-  <n-config-provider w-full h-full :theme="themStore.naiveTheme">
+  <n-config-provider :theme="appStore.naiveTheme">
     <n-loading-bar-provider>
       <n-dialog-provider>
         <n-notification-provider>
           <n-message-provider>
-            <div class="app-container" :class="{ dark: themStore.darkMode }">
+            <div class="app-container" :class="{ dark: appStore.darkMode }">
               <slot />
             </div>
 
@@ -48,3 +48,6 @@ watch(
     <n-global-style />
   </n-config-provider>
 </template>
+<style lang="scss">
+@import '@/styles/main.scss';
+</style>

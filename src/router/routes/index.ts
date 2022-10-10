@@ -3,11 +3,11 @@ export const basicRoutes: RoutesType = [
   {
     path: '/',
     name: 'main',
-    redirect: '/hello',
+    redirect: '/halo-5',
   },
   {
-    path: '/hello',
-    name: 'hello',
-    component: () => import('@/components/HelloWorld.vue'),
+    path: '/halo-5',
+    name: 'halo5',
+    component: () => import('@/views/Halo5/index.vue'),
   },
 ]

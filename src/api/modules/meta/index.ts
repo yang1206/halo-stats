@@ -1,8 +1,8 @@
 import request from '@/service'
-import type { CampaignMissions } from '@/api'
+import type { ICampaignMissions } from '@/api'
 
 export const getH5CampaignMissions = () => {
-  return request<any, CampaignMissions>({
+  return request<any, ICampaignMissions>({
     url: '/metadata/h5/metadata/campaign-missions',
     method: 'get',
   })

@@ -2,9 +2,12 @@ import { darkTheme } from 'naive-ui'
 import { defineStore } from 'pinia'
 import type { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
 
-export const useThemeStore = defineStore('theme-store', {
+export const useAppStore = defineStore('app-store', {
   state: () => ({
-    darkMode: localStorage.getItem('theme') || false,
+    darkMode: localStorage.getItem('THEME') === 'dark' || false,
+    collapsedLeft: document.body.clientWidth <= 821,
+    collapsedRight: document.body.clientWidth <= 821,
+    lang: localStorage.getItem('lang') || 'zh',
   }),
   getters: {
     naiveTheme(): BuiltInGlobalTheme | undefined {
@@ -19,6 +22,12 @@ export const useThemeStore = defineStore('theme-store', {
     /** 切换/关闭 暗黑模式 */
     toggleDarkMode() {
       this.darkMode = !this.darkMode
+    },
+    triggerCollapsedLeft(status: boolean) {
+      this.collapsedLeft = status
+    },
+    triggerCollapsedRight(status: boolean) {
+      this.collapsedRight = status
     },
   },
 })

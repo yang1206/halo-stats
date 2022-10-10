@@ -10,7 +10,7 @@ const request = new Request({
   timeout: 1000 * 60 * 5,
   headers: {
     accept: 'application/json',
-    'Accept-Language': 'zh',
+    'Accept-Language': localStorage.getItem('lang'),
     'Ocp-Apim-Subscription-Key': '41ebd915861541819dc803e3eddfdeed',
   },
   interceptors: {
