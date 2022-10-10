@@ -18,11 +18,11 @@
         {{ props.title }}
         <n-select
           v-model:value="currentLang"
-          w-25
-          h-8
+          w-28
           right-15
           absolute
           :options="langList"
+          @update:value="changeLang"
         />
         <n-switch
           :value="appStore.darkMode"
@@ -46,7 +46,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useOsTheme } from 'naive-ui'
-import { useStorage } from '@vueuse/core'
+import { useDark, useStorage, useToggle } from '@vueuse/core'
 import { useAppStore } from '@/store'
 
 const currentLang = useStorage('lang', 'zh')
@@ -67,7 +67,8 @@ const langList = [
 ]
 const appStore = useAppStore()
 const router = useRouter()
-
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 const props = withDefaults(
   defineProps<{
     title?: string
@@ -80,12 +81,15 @@ const props = withDefaults(
 )
 const switchTheme = (theme: boolean) => {
   if (theme) {
-    localStorage.setItem('THEME', 'dark')
     appStore.setDarkMode(true)
+    toggleDark(true)
   } else {
-    localStorage.setItem('THEME', 'light')
     appStore.setDarkMode(false)
+    toggleDark(false)
   }
+}
+const changeLang = () => {
+  window.location.reload()
 }
 const goBack = () => {
   if (window.history.length <= 1) {
@@ -98,7 +102,7 @@ const goBack = () => {
 }
 
 onMounted(() => {
-  if (!localStorage.getItem('THEME')) {
+  if (!localStorage.getItem('vueuse-color-scheme')) {
     switchTheme((useOsTheme() as unknown as string) === 'dark')
   }
 })
@@ -132,6 +136,7 @@ onMounted(() => {
     }
   }
 }
+
 .dark {
   .nav-title-card {
     background-color: rgba(16, 16, 20, 0.75);

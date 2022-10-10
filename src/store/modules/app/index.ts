@@ -4,7 +4,7 @@ import type { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
 
 export const useAppStore = defineStore('app-store', {
   state: () => ({
-    darkMode: localStorage.getItem('THEME') === 'dark' || false,
+    darkMode: localStorage.getItem('vueuse-color-scheme') === 'dark' || false,
     collapsedLeft: document.body.clientWidth <= 821,
     collapsedRight: document.body.clientWidth <= 821,
     lang: localStorage.getItem('lang') || 'zh',
