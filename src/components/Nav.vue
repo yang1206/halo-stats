@@ -15,7 +15,7 @@
           </template>
         </n-button>
 
-        {{ props.title }}
+        {{ props.title ? props.title : 'Halo' }}
         <n-select
           v-model:value="currentLang"
           w-28

@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <AppProvider>
     <div has-sider class="main-wrap" position="static">
@@ -14,8 +12,8 @@
           <component :is="Component" v-if="!$route.meta.keepAlive" />
         </router-view>
       </div>
-
       <!-- 右侧 -->
+      <RightBar />
     </div>
     <!-- 登录/注册公共组件 -->
   </AppProvider>
