@@ -22,8 +22,15 @@
           right-15
           absolute
           :options="langList"
+          filterable
           @update:value="changeLang"
-        />
+        >
+          <template #arrow>
+            <transition name="slide-left">
+              <icon :icon="'material-symbols:language'" />
+            </transition>
+          </template>
+        </n-select>
         <n-switch
           :value="appStore.darkMode"
           size="small"
