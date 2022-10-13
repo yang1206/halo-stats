@@ -16,6 +16,18 @@
         </n-button>
 
         {{ props.title ? props.title : 'Halo' }}
+        <div v-if="appStore.collapsedRight" left-20 absolute w-45>
+          <n-input
+            v-model:value="keyword"
+            clearable
+            placeholder="输入GameTag"
+            @keyup.enter.prevent="handleSearch"
+          >
+            <template #prefix>
+              <icon :icon="'material-symbols:search'" />
+            </template>
+          </n-input>
+        </div>
         <n-select
           v-model:value="currentLang"
           w-28
@@ -54,7 +66,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useOsTheme } from 'naive-ui'
 import { useDark, useStorage, useToggle } from '@vueuse/core'
-import { useAppStore } from '@/store'
+import { useAppStore, useUserStore } from '@/store'
 
 const currentLang = useStorage('lang', 'zh')
 const langList = [
@@ -73,9 +85,12 @@ const langList = [
   },
 ]
 const appStore = useAppStore()
+const userStore = useUserStore()
 const router = useRouter()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+const keyword = ref('')
+
 const props = withDefaults(
   defineProps<{
     title?: string
@@ -86,6 +101,11 @@ const props = withDefaults(
     back: false,
   }
 )
+
+const handleSearch = () => {
+  userStore.setGameTag(keyword.value)
+}
+
 const switchTheme = (theme: boolean) => {
   if (theme) {
     appStore.setDarkMode(true)

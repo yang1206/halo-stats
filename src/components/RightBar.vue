@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!app.collapsedRight" class="right-wrap">
+  <div v-if="!appStore.collapsedRight" class="right-wrap">
     <div class="search-wrap">
       <n-input
         v-model:value="keyword"
@@ -17,19 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/store'
+import { useAppStore, useUserStore } from '@/store'
 
 const keyword = ref('')
-const app = useAppStore()
-const router = useRouter()
+const appStore = useAppStore()
+const userStore = useUserStore()
 
 const handleSearch = () => {
-  router.push({
-    name: 'home',
-    query: {
-      q: keyword.value,
-    },
-  })
+  userStore.setGameTag(keyword.value)
 }
 </script>
 
