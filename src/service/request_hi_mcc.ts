@@ -6,12 +6,13 @@ interface HttpRequestConfig<T, R> extends RequestConfig<R> {
   data?: T
 }
 const request = new Request({
-  baseURL: import.meta.env.VITE_URL_H5_HW2,
+  baseURL: import.meta.env.VITE_URL_HI,
   timeout: 1000 * 60 * 5,
   headers: {
     accept: 'application/json',
     'Accept-Language': localStorage.getItem('lang'),
-    'Ocp-Apim-Subscription-Key': '41ebd915861541819dc803e3eddfdeed',
+    authorization:
+      'Bearer tok_dev_6zWefuU52wJAN5LrpsaVwetjrJYBzEAFhVtJTJsV2nx4dC91YurXcCdiWT27aznm',
   },
   interceptors: {
     // 请求拦截器

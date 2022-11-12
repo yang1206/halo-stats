@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { t2s } from '@/utils/common'
-import { getH5CampaignMissions } from '@/api'
+import { getH5CampaignMissions, getH5Profiles } from '@/api'
 import type { ICampaignMissions } from '@/api'
 const CampaignMissions = ref<ICampaignMissions>()
 getH5CampaignMissions().then((res) => {
   CampaignMissions.value = res
 })
+getH5Profiles('yang1206')
 </script>
 
 <template>
